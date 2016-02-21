@@ -4,7 +4,7 @@
 
 Name:           %{?scl_prefix}%{pkg_name}
 Version:        1.7
-Release:        4.11%{?dist}
+Release:        4.12%{?dist}
 Epoch:          0
 Summary:        Modello Data Model toolkit
 # The majority of files are under MIT license, but some of them are
@@ -18,16 +18,16 @@ BuildArch:      noarch
 
 BuildRequires:  %{?scl_prefix_java_common}maven-local
 BuildRequires:  %{?scl_prefix_java_common}mvn(junit:junit)
-BuildRequires:  maven30-mvn(org.apache.maven.plugin-tools:maven-plugin-annotations)
-BuildRequires:  maven30-mvn(org.apache.maven.plugins:maven-dependency-plugin)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-model)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-plugin-api)
-BuildRequires:  maven30-mvn(org.apache.maven:maven-project)
-BuildRequires:  maven30-mvn(org.codehaus.plexus:plexus-compiler-api)
-BuildRequires:  maven30-mvn(org.codehaus.plexus:plexus-compiler-javac)
-BuildRequires:  maven30-mvn(org.codehaus.plexus:plexus-container-default)
-BuildRequires:  maven30-mvn(org.codehaus.plexus:plexus-utils)
-BuildRequires:  maven30-mvn(org.sonatype.plexus:plexus-build-api)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.plugin-tools:maven-plugin-annotations)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven.plugins:maven-dependency-plugin)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-model)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-plugin-api)
+BuildRequires:  %{?scl_prefix}mvn(org.apache.maven:maven-project)
+BuildRequires:  %{?scl_prefix}mvn(org.codehaus.plexus:plexus-compiler-api)
+BuildRequires:  %{?scl_prefix}mvn(org.codehaus.plexus:plexus-compiler-javac)
+BuildRequires:  %{?scl_prefix}mvn(org.codehaus.plexus:plexus-container-default)
+BuildRequires:  %{?scl_prefix}mvn(org.codehaus.plexus:plexus-utils)
+BuildRequires:  %{?scl_prefix}mvn(org.sonatype.plexus:plexus-build-api)
 
 
 %description
@@ -48,7 +48,7 @@ API documentation for %{pkg_name}.
 
 %prep
 %setup -q -n %{pkg_name}-%{version}
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 cp -p %{SOURCE1} LICENSE
 # We don't generate site; don't pull extra dependencies.
@@ -56,14 +56,14 @@ cp -p %{SOURCE1} LICENSE
 %{?scl:EOF}
 
 %build
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 # skip tests because we have too old xmlunit in Fedora now (1.0.8)
 %mvn_build -f
 %{?scl:EOF}
 
 %install
-%{?scl:scl enable maven30 %{scl} - <<"EOF"}
+%{?scl:scl enable %{scl} - <<"EOF"}
 set -e -x
 %mvn_install
 
@@ -76,6 +76,9 @@ set -e -x
 %doc LICENSE
 
 %changelog
+* Mon Jan 11 2016 Michal Srb <msrb@redhat.com> - 0:1.7-4.12
+- maven33 rebuild #2
+
 * Sat Jan 09 2016 Michal Srb <msrb@redhat.com> - 0:1.7-4.11
 - maven33 rebuild
 
