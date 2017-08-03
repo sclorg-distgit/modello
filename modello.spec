@@ -3,7 +3,7 @@
 
 Name:           %{?scl_prefix}modello
 Version:        1.9.1
-Release:        1.1%{?dist}
+Release:        1.2%{?dist}
 Epoch:          0
 Summary:        Modello Data Model toolkit
 # The majority of files are under MIT license, but some of them are
@@ -75,6 +75,9 @@ sed -i s/maven-project/maven-core/ modello-maven-plugin/pom.xml
 %doc LICENSE
 
 %changelog
+* Thu Jun 22 2017 Michael Simacek <msimacek@redhat.com> - 0:1.9.1-1.2
+- Mass rebuild 2017-06-22
+
 * Wed Jun 21 2017 Java Maintainers <java-maint@redhat.com> - 0:1.9.1-1.1
 - Automated package import and SCL-ization
 
